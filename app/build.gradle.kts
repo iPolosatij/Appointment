@@ -13,7 +13,8 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
+// Required when setting minSdkVersion to 20 or lower
+        multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
@@ -32,6 +33,14 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+        compileOptions {
+            // Flag to enable support for the new language APIs
+
+            // For AGP 4.1+
+            isCoreLibraryDesugaringEnabled = true
+            // For AGP 4.0
+            // coreLibraryDesugaringEnabled = true
+        }
     }
     kotlinOptions {
         jvmTarget = "1.8"
@@ -50,6 +59,13 @@ android {
 }
 
 dependencies {
+
+    // For AGP 7.4+
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
+    // For AGP 7.3
+    // coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.2.3")
+    // For AGP 4.0 to 7.2
+    // coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.9")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
