@@ -19,7 +19,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -32,7 +31,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 
@@ -43,7 +41,9 @@ class WebViewActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            intent.getStringExtra("url")?.let { MainContent(url = it) }
+            MaterialTheme {
+                intent.getStringExtra("url")?.let { MainContent(url = it) }
+            }
         }
         onBackPressedDispatcher.addCallback(
             this /* lifecycle owner */,
@@ -87,13 +87,12 @@ class WebViewActivity : ComponentActivity() {
                         .clip(CircleShape)
                         .border(1.5.dp, colorResource(id = R.color.teal_200), CircleShape)
                 )
-                Spacer(modifier = Modifier.width(width = 16.dp))
                 Text(
                     text = getString(R.string.app_name),
                     color = MaterialTheme.colorScheme.secondary,
                     style = MaterialTheme.typography.titleLarge,
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.align(alignment = Alignment.CenterVertically)
+                    modifier = Modifier.padding(16.dp, 0.dp,0.dp,0.dp).align(alignment = Alignment.CenterVertically)
                 )
             }
             Spacer(
@@ -116,13 +115,5 @@ class WebViewActivity : ComponentActivity() {
                 it.loadUrl(mUrl)
             })
         }
-    }
-
-    // For displaying preview in
-// the Android Studio IDE emulator
-    @Preview(showBackground = true)
-    @Composable
-    fun DefaultPreview() {
-        MainContent("https://vitamed-rm.ru/visit/specialty")
     }
 }

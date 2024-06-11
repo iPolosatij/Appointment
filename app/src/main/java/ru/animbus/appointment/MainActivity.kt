@@ -8,9 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ButtonDefaults
@@ -31,7 +29,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            SetControlBtns()
+            MaterialTheme {
+                SetControlBtns()
+            }
         }
     }
 
@@ -39,8 +39,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun SetControlBtns() {
         Column(modifier = Modifier.fillMaxWidth()) {
-            Spacer(modifier = Modifier.height(height = 48.dp))
-            Row(modifier = Modifier.padding(all = 16.dp)){
+            Row(modifier = Modifier.padding(16.dp, 48.dp, 16.dp, 16.dp)){
                 ElevatedButton(
                     onClick = {
                         val intent = Intent(this@MainActivity, WebViewActivity::class.java)
@@ -88,7 +87,6 @@ class MainActivity : ComponentActivity() {
                     )
                 }
             }
-            Spacer(modifier = Modifier.height(height = 64.dp))
             Image(
                 painter = painterResource(R.drawable.appointment_transparent),
                 contentDescription = null,
@@ -96,6 +94,7 @@ class MainActivity : ComponentActivity() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .size(300.dp)
+                    .padding(0.dp, 64.dp, 0.dp, 0.dp)
             )
         }
     }
